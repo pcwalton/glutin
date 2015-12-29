@@ -433,10 +433,6 @@ impl PixelFormatRequirements {
                     Some(val) if val >= req_ms => (),
                     _ => return false
                 }
-            } else {
-                if format.multisampling.is_some() {
-                    return false;
-                }
             }
 
             if let Some(srgb) = self.srgb {
