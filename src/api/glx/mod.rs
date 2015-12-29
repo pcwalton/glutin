@@ -39,6 +39,18 @@ impl Context {
                    opengl: &'a GlAttributes<&'a Context>, display: *mut ffi::Display)
                    -> Result<ContextPrototype<'a>, CreationError>
     {
+        // This is completely ridiculous, but VirtualBox's OpenGL driver needs some call handled by
+        // *it* (i.e. not Mesa) to occur before anything else can happen. That is because
+        // VirtualBox's OpenGL driver is going to apply binary patches to Mesa in the DLL
+        // constructor and until it's loaded it won't have a chance to do that.
+        //
+        // The easiest way to do this is to just call `glXQueryVersion()` before doing anything
+        // else. See: https://www.virtualbox.org/ticket/8293
+        let (mut major, mut minor) = (0, 0);
+        unsafe {
+            glx.QueryVersion(display as *mut _, &mut major, &mut minor);
+        }
+
         // finding the pixel format we want
         let (fb_config, pixel_format) = {
             let configs = unsafe { try!(enumerate_configs(&glx, xlib, display)) };
