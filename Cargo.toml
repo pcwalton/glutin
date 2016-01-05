@@ -16,6 +16,7 @@ name = "glutin"
 [features]
 default = []
 headless = []
+use-xsettings = ["xsettings"]
 
 [dependencies]
 gl_common = "0.1.0"
@@ -94,12 +95,20 @@ wayland-kbd = "0.3.3"
 wayland-window = "0.2.2"
 x11-dl = "~2.2"
 
+[target.i686-unknown-linux-gnu.dependencies.xsettings]
+version = "0.2"
+optional = true
+
 [target.x86_64-unknown-linux-gnu.dependencies]
 osmesa-sys = "0.0.5"
 wayland-client = { version = "0.5.4", features = ["egl", "dlopen"] }
 wayland-kbd = "0.3.3"
 wayland-window = "0.2.2"
 x11-dl = "~2.2"
+
+[target.x86_64-unknown-linux-gnu.dependencies.xsettings]
+version = "0.2"
+optional = true
 
 [target.arm-unknown-linux-gnueabihf.dependencies]
 osmesa-sys = "0.0.5"
@@ -108,12 +117,20 @@ wayland-kbd = "0.3.3"
 wayland-window = "0.2.2"
 x11-dl = "~2.2"
 
+[target.arm-unknown-linux-gnueabihf.dependencies.xsettings]
+version = "0.2"
+optional = true
+
 [target.aarch64-unknown-linux-gnu.dependencies]
 osmesa-sys = "0.0.5"
 wayland-client = { version = "0.5.4", features = ["egl", "dlopen"] }
 wayland-kbd = "0.3.3"
 wayland-window = "0.2.2"
 x11-dl = "~2.2"
+
+[target.aarch64-unknown-linux-gnu.dependencies.xsettings]
+version = "0.2"
+optional = true
 
 [target.x86_64-unknown-dragonfly.dependencies]
 osmesa-sys = "0.0.5"
@@ -122,12 +139,20 @@ wayland-kbd = "0.3.3"
 wayland-window = "0.2.2"
 x11-dl = "~2.2"
 
+[target.x86_64-unknown-dragonfly.dependencies.xsettings]
+version = "0.2"
+optional = true
+
 [target.x86_64-unknown-freebsd.dependencies]
 osmesa-sys = "0.0.5"
 wayland-client = { version = "0.5.4", features = ["egl", "dlopen"] }
 wayland-kbd = "0.3.3"
 wayland-window = "0.2.2"
 x11-dl = "~2.2"
+
+[target.x86_64-unknown-freebsd.dependencies.xsettings]
+version = "0.2"
+optional = true
 
 [target.i686-unknown-linux-gnu.dependencies.x11]
 version = "2.2"
