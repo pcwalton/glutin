@@ -517,6 +517,15 @@ impl Window {
     pub fn set_cursor_state(&self, state: CursorState) -> Result<(), String> {
         self.window.set_cursor_state(state)
     }
+
+    /// Informs the window manager that the alpha component of the framebuffer has changed.
+    ///
+    /// This is used on Mac OS X to update the window shadow for borderless, transparent windows.
+    /// On that platform, this is an expensive operation, so you should not call this too often.
+    #[inline]
+    pub fn framebuffer_alpha_changed(&self) {
+        self.window.framebuffer_alpha_changed()
+    }
 }
 
 impl GlContext for Window {

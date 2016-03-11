@@ -740,6 +740,18 @@ impl Window {
 
         Ok(())
     }
+
+    /// Tells Cocoa to rebuild the window shadow (in a roundabout way).
+    ///
+    /// Yes, this is really the Apple-recommended way to do this. See:
+    ///
+    ///     https://developer.apple.com/library/mac/samplecode/RoundTransparentWindow/
+    fn reset_shadow(&self) {
+        unsafe {
+            NSWindow::setHasShadow_(*self.window, NO);
+            NSWindow::setHasShadow_(*self.window, YES);
+        }
+    }
 }
 
 impl GlContext for Window {
@@ -789,6 +801,11 @@ impl GlContext for Window {
     #[inline]
     fn get_pixel_format(&self) -> PixelFormat {
         self.pixel_format.clone()
+    }
+
+    #[inline]
+    fn framebuffer_alpha_changed(&self) {
+        self.reset_shadow();
     }
 }
 

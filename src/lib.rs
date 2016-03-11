@@ -131,6 +131,12 @@ pub trait GlContext {
 
     /// Returns the pixel format of the main framebuffer of the context.
     fn get_pixel_format(&self) -> PixelFormat;
+
+    /// Informs the window manager that the alpha component of the framebuffer has changed.
+    ///
+    /// This is used on Mac OS X to update the window shadow for borderless, transparent windows.
+    /// On that platform, this is an expensive operation, so you should not call this too often.
+    fn framebuffer_alpha_changed(&self) {}
 }
 
 /// Error that can happen while creating a window or a headless renderer.
