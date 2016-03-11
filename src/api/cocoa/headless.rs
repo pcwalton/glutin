@@ -5,6 +5,7 @@ use GlAttributes;
 use GlContext;
 use PixelFormatRequirements;
 use libc;
+use std::os;
 use std::ptr;
 
 use core_foundation::base::TCFType;
@@ -57,7 +58,7 @@ impl HeadlessContext {
         };
 
         // Load the function pointers as we need them to create the FBO
-        gl::load_with(|s| headless.get_proc_address(s) as *const libc::c_void);
+        gl::load_with(|s| headless.get_proc_address(s) as *const os::raw::c_void);
 
         Ok(headless)
     }
